@@ -1,0 +1,113 @@
+**************************************************************
+NAME       :Cheryl Nellissery
+CLASS       :S.E. Computers
+**************************************************************
+SOLUTIONS TO QUERIES OF PROJECT(HOSPITAL MANAGEMENT)
+
+2)Find the number of patients who need treatment for cancer
+
+ANS:
+
+SELECT count(patient_id)"NO OF PATIENTS"
+from patient
+where service='ONCOLOGY'
+
+OUTPUT:
+| NO OF PATIENTS |
+|-------------------------- |
+|              2                    |
+
+**************************************************************
+3)Find total bill for every patient
+
+ANS:
+
+SELECT p.patient_name , b.AMOUNT "TOTAL BILL"
+from bill b ,patient p
+where b.name=p.patient_name
+
+OUTPUT:
+
+|   PATIENT_NAME | TOTAL BILL  |
+|---------------------------|--------------------|
+|   Richa Sharma 	|      10000 	         |
+|     Garima Sen 	|        300	         |
+|   Partho Ghosh 	|     500000          |
+| Parvati Mishra	|      23000 	         |
+|     Payal Rana 	|       4500            |
+|           Maxy 	|      23789 	         |
+|    Paras Singh	|      45300 	         |
+|  Pramila Misti 	|        900 	         |
+        
+**************************************************************
+4)Find the patients who are in deluxe room
+
+ANS:
+
+SELECT patient_name
+from  room NATURAL JOIN patient
+where type='DELUXE'
+
+OUTPUT:
+
+| PATIENT_NAME |
+|-------------------------|
+|   Garima Sen          |
+|         Maxy               |
+**************************************************************
+
+6)Find the services for which there exists no doctors with masters degree
+
+ANS:
+
+select doctor_sepcialization"SERVICES WITH BACHELORS DEGREE"
+from doctor
+where doctor_id in   (select doctor_id
+  		from doctor 
+  		where doctor_degree='Bachelors'
+		 )
+
+OUTPUT:
+
+| SERVICES WITH BACHELORS DEGREE |
+|----------------------------------------------------------|
+|                      DENTISTRY 		    |
+|                        GENERAL 		    |
+
+**************************************************************
+9)Find the number of doctors for each service
+
+ANS:
+
+SELECT count(doctor_id)"AVAILABLE DOCTORS",DOCTOR_SEPCIALIZATION "SERVICE"
+from  doctor
+group by doctor_sepcialization
+
+OUTPUT:
+
+| AVAILABLE DOCTORS |    SERVICE         |
+|----------------------------------|-----------------------|
+|                 2	          | CARDIOLOGY |
+|                 1 	          |   ONCOLOGY   |
+|                 1 	          |    GENERAL      |
+|                 1 	          |  DENTISTRY     |
+
+*****************************************************************************************
+10)Show all nurse and wardboy details
+
+ANS:
+
+SELECT *
+from  staff
+
+OUTPUT:
+
+| NURSE_ID | NURSE_NAME | WARDBOY_ID | WARDBOY_NAME |  NURSE_DEPT    | WARDBOY_DEPT |
+|----------------|-----------------------|---------------------|-----------------------------|-----------------------|---------------------------|
+|        1 	    |     Sheela              |     (null)  	        |       (null) 	           | CARDIOLOGY  |       (null) 	     |
+|        2 	    |      Liala               |     (null) 	        |       (null) 	           |  DENTISTRY      |       (null) 	     |
+|   (null) 	    |     (null)                |          1 	        |       Rajeev 	           |     (null)                |     CLEANING	     |
+|   (null) 	    |     (null)                |          4 	        |        Sanju 	           |     (null)                |      SERVICE 	     |
+|        3 	    |     Amruta            |     (null) 	        |       (null) 	           |   ONCOLOGY    |       (null) 	     |
+
+***************************************************************************************************
